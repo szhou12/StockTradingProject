@@ -129,7 +129,8 @@ class Stock_1:
                 
         def compare_1(self):
                 
-                for i in range(self.days,3663):# list range(1-3665), delete first row gives range(2-3665), transfer to python list range(0,3663)
+                for i in range(self.days,3663):
+                # list range(1-3665), delete first row gives range(2-3665), transfer to python list range(0,3663)
                         #buy
                         if (eval(self.Open[i]) - self.average_close[i-self.days])/self.average_close[i-self.days] < -0.03 and self.balance != 0:
                                 self.stock = self.stock + self.balance/eval(self.Open[i])
@@ -211,7 +212,9 @@ class Stock_2:
                                         self.balance_list.append(round(self.balance,1))
 
                                 else:
-                                        # this means that even though the current return is less than past average return, but since the past average return is negative, we believe that even if we buy stocks at this moment, we will lose money too.
+                                        # this means that even though the current return is less than past average return, 
+                                        # but since the past average return is negative, we believe that even if we buy stocks at this moment, 
+                                        # we will lose money too.
                                         if i == self.days:
                                                 self.stock_list.append(round(self.stock,1))
                                                 self.balance_list.append(round(self.balance,1))
@@ -226,7 +229,8 @@ class Stock_2:
                                 if eval(self.Open[i]) > eval(self.Close[i-1]):
                                         # we expect two things here: 
                                         # 1. the future stock price is going up so we want to keep some stocks 
-                                        # 2. At this moment, we can make a profit from selling stocks but we don't want to sell all because of reason 1. So we only sell a certain portion of stocks
+                                        # 2. At this moment, we can make a profit from selling stocks but we don't want to sell 
+                                        # all because of reason 1. So we only sell a certain portion of stocks
                                         percent = eval(self.Open[i])/eval(self.Close[i-1]) - 1
                                         sell = self.stock * percent
                                         self.stock = self.stock - sell
@@ -263,16 +267,6 @@ class Stock_2:
                                 print("{0}              {1}              {2}".format(self.date[k], self.stock_list[k-self.days], self.balance_list[k-self.days]))
                 return self.balance_list[3663-self.days]
 
-
-def printintro_1():
-    print("[Method 1]\nIt calculates the moving average of the data in which the number of days is chosen by you.\nIf the current day stock price is 3.0%  lower than the average of the previous days,\nwe buy stocks with all the money we have.\nIf the current day stock price is 2.5%  higher than the average of the previous days,\nwe sell all stocks we have.\nWe sell all remaining stocks on the last day of data.\n")
-
-def printintro_2():
-    print("[Method 2]\nIt uses the concept of average return.\nWe firstly calculate each day’s return based on the previous day.\n(use Close price for both)\nThen we calculate the average return by the number of days you choose.\n(all use Close prices)\nFor example, if 20 days are chosen, it calculates the average return of these 20days.\nThen it calculates the 21st day’s return with 21st day’s Open price and 20th day’s Close price.\nThen it compares the average return with 21st day’s return.\nIf the 21st day’s return is lower than the average return,it means that on current day the close price is likely to rise to achieve the past average return.\nSo we buy stocks with all the money.\nNote:\nThe purchase only happens when the average return is positive.\nBecause if the past average return is negative,we believe that even if we buy stocks at this moment, we will lose money too.\n")
-    print("If the 21st day’s return is higher than the average return,it means that the current day's open price is even higher than the last day's close price, so we sell.\nWe expect two things here:\n1. the future stock price is going up so we want to keep some stocks.\n2. At this moment, we can make a profit from selling stocks but we don't want to sell all because of reason 1.\nSo we only sell a certain portion of stocks.\nWe use the 21st day’s return as the percentage to calculate the portion of stocks we use to sell.\nWe make a deal in this way each day since 21st day.\nWe sell all remaining stocks on the last day of data.\n")
-
-def printintro_3():
-    print("[Method 3]\nWe purchase as much stock as possible on the first day and sell on the last.\nWe use the result of this method as comparison to above two methods.\n")
 
 def operate_1(days, average_close, Open_rev, balance, stock, Date_rev):
     s1 = Stock_1(days, average_close, Open_rev, balance, stock, Date_rev)
@@ -316,9 +310,7 @@ def main():
 
     
         print("There are three methods for you to buy and sell stocks: Method 1, Method 2, Method 3.\n")
-        printintro_1()
-        printintro_2()
-        printintro_3()
+ 
         days = int(input("How many days you want to use to calculate the past average stock price: "))
         average_close = mean(days, Close_rev)
         average_return = mean_return(days, Close_rev)
@@ -354,20 +346,7 @@ def main():
             else:
                 print('Goodbye!')
   
-        # Plot the average price of Close price.
-        # The overall trend of stock price is increasing. But we also see a large drop in 2014, which was likely the time to buy a large amount of stocks.
-        # However, Method 1 doesn't earn more money than simply purchasing stocks at the beginning and sell them as the end. 
-        # It may imply that the slope of average Close price may be flatter than the slope of the beginning and the end.
-        # But when the number of days is decreasing (say 20 to 2), the profit from Method 1 is increasing.
-        # It may imply that the slope of average Close price is exceeding the slope of the beginning and the end.
         graph_average_close(days,Date_rev,average_close)
-
-        # Plot the average return. The average return is quite stable (in between (-20% to 20%)).
-        # The Plot can imply that Method 2 based on average return is relatively conservative than Method 1 and Method 3 as well.
-        # Therefore, the profit we earn based on the analysis of average return is not as much as that based on method 1.
-        # It is the case especially when the number of days to calculate the average is increasing.
-        # But when the days are around 20, Method 2 is over Method 1
-        # The reason might be Method 2 which is based on the average return is more conservative than Method 1, so it doesn't earn much money and it doesn't lose a lot of money too.
         graph_average_return(days,Date_rev,average_return)
     
         
