@@ -10,7 +10,7 @@ The program will not take any action during the first 20 days so that it can use
 
 For example, suppose a user uses 20 days as the benchmark. If the current day stock price is 3.0% lower than the average of the previous 20 days, we buy stocks with all the money we have. If the current day stock price is 2.5% higher than the average of the previous days, we sell all stocks we have. When the algorithm reaches the last day of data, have it sell all remaining stock, if we have any. Then the program will report the total amount of money we are left with.
 
-
+![fisrt_algorithm](https://user-images.githubusercontent.com/35708194/37880740-a91698a4-3052-11e8-8bf1-65d92169f6d3.png)
 
 ## Second Trading Algorithm
 The second analysis uses the concept of average return. We firstly calculate each day’s return based on the previous day (use Close price for both). Then we calculate the average return by the number of days you choose (all use Close prices). For example, if 20 days are chosen, it calculates the average return of these 20 days. Then it calculates the 21st day’s return with 21st day’s Open price and 20th day’s Close price. Then it compares the average return with 21st day’s return. If the 21st day’s return is lower than the average return,it means that on current day the close price is likely to rise to achieve the past average return. So we buy stocks with all the money. 
