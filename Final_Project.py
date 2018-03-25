@@ -4,10 +4,9 @@ Algorithmithic Trading Program
       --This programme traces through stock price of Apple Corp. and decides to buy or sell stocks accordingly.
 
 Shuyu Zhou
-ID#: 28376996
-Lab Section TR 2:00-3:15pm
 Fall 2015
 """
+
 
 def first_last(balance, Close_rev, Open_rev):
         stock = balance/eval(Close_rev[0])
@@ -36,7 +35,7 @@ def mean(days, Close_rev):
                 sum_close = 0
         return average_close
 
-#####################################################################
+
 def mean_return(days, Close_rev):
         n = days
         sum_return = 0
@@ -51,7 +50,7 @@ def mean_return(days, Close_rev):
                 sum_return = 0
         return average_return
 
-#####################################################################
+
 def year(date):
     b = []
     for i in range(len(date)):
@@ -103,7 +102,7 @@ def graph_average_return(days,Date_rev,average_return):
         plt.plot(x, average_return)
         plt.show()
         
-#####################################################################
+
 class Stock_1:
         def __init__(self, days, average_close, Open, balance, stock, date):
                 self.days = days
@@ -168,7 +167,7 @@ class Stock_1:
 
 
                                 
-#####################################################################
+
 class Stock_2:
         def __init__(self, days, average_return, Open, balance, stock, date, Close):
                 self.days = days
@@ -264,7 +263,7 @@ class Stock_2:
                                 print("{0}              {1}              {2}".format(self.date[k], self.stock_list[k-self.days], self.balance_list[k-self.days]))
                 return self.balance_list[3663-self.days]
 
-#####################################################################
+
 def printintro_1():
     print("[Method 1]\nIt calculates the moving average of the data in which the number of days is chosen by you.\nIf the current day stock price is 3.0%  lower than the average of the previous days,\nwe buy stocks with all the money we have.\nIf the current day stock price is 2.5%  higher than the average of the previous days,\nwe sell all stocks we have.\nWe sell all remaining stocks on the last day of data.\n")
 
@@ -274,7 +273,7 @@ def printintro_2():
 
 def printintro_3():
     print("[Method 3]\nWe purchase as much stock as possible on the first day and sell on the last.\nWe use the result of this method as comparison to above two methods.\n")
-#####################################################################
+
 def operate_1(days, average_close, Open_rev, balance, stock, Date_rev):
     s1 = Stock_1(days, average_close, Open_rev, balance, stock, Date_rev)
     print("Date                  # of stocks        Balance")
@@ -289,11 +288,18 @@ def operate_2(days, average_return, Open_rev, balance, stock, Date_rev, Close_re
     y = s2.compare_2()
     return y
                 
-#####################################################################
+
 def main():
         
         import csv
-        f = open('/Users/JoshuaZhou/Documents/2015 FALL/CSC 161/project/InterDayAAPL_2015_07_28to2001_01_03.csv')
+        import os 
+
+        file_path = "./InterDayAAPL_2015_07_28to2001_01_03.csv"
+
+        script_dir = os.path.dirname(__file__)
+        stock_path = os.path.join(script_dir, file_path)
+
+        f = open(stock_path, "r")
         Open = []
         Close = []
         Date = []
@@ -308,7 +314,7 @@ def main():
         Date_rev = reverse(Date)
         f.close()
 
-    #####################################################################  
+    
         print("There are three methods for you to buy and sell stocks: Method 1, Method 2, Method 3.\n")
         printintro_1()
         printintro_2()
@@ -318,11 +324,11 @@ def main():
         average_return = mean_return(days, Close_rev)
         balance = 1000
         stock = 0
-    #####################################################################
+    
         # first purchase and last sell
         first_purchase_last_sell = first_last(balance, Close_rev, Open_rev)
         z = first_purchase_last_sell
-    #####################################################################
+    
         ask_1 = input("Do you want to try method 1 ('yes' or 'no'):")
         if ask_1 in ['yes','ye','yeah','y','Yes','Ye','Y','Yeah','Of course','sure','why not']:
             x = operate_1(days, average_close, Open_rev, balance, stock, Date_rev)
@@ -347,7 +353,7 @@ def main():
                 print("Method 2 earned ${0:0.2f} more(less) than purchasing as much stock as possible on the first day and selling on the last.".format(y-z))
             else:
                 print('Goodbye!')
-  #####################################################################
+  
         # Plot the average price of Close price.
         # The overall trend of stock price is increasing. But we also see a large drop in 2014, which was likely the time to buy a large amount of stocks.
         # However, Method 1 doesn't earn more money than simply purchasing stocks at the beginning and sell them as the end. 
