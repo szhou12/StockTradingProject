@@ -26,7 +26,7 @@ We purchase as many stocks as possible on the first day and sell on the last. We
 ### The First Graph
 This plots the average price of Close price. The overall trend of stock price is increasing. But we also see a large drop in 2014, which was likely the time to buy a large amount of stocks. However, Method 1 doesn't earn more money than simply purchasing stocks at the beginning and sell them as the end. It may imply that the slope of average Close price may be flatter than the slope of the beginning and the end. But when the number of days is decreasing (say 20 to 2), the profit from Method 1 is increasing. It may imply that the slope of average Close price is exceeding the slope of the beginning and the end.
 
-### The second Graph
+### The Second Graph
 This plots the average return. The average return is quite stable (in between (-20% to 20%)). The Plot can imply that Method 2 based on average return is relatively conservative than Method 1 and Method 3 as well. Therefore, the profit we earn based on the analysis of average return is not as much as that based on method 1. It is the case especially when the number of days to calculate the average is increasing. But when the days are around 20, Method 2 is over Method 1. The reason might be Method 2 which is based on the average return is more conservative than Method 1, so it doesn't earn much money and it doesn't lose a lot of money too.
 
 ## Acknowledgments
